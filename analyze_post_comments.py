@@ -4,8 +4,6 @@ from collections import Counter
 import praw
 import pickle
 
-#TODO Get comments a few get_mores at a time instead of all at once
-#TODO Every thousand new comments, process these new comments and update the file, PRINT something
 
 blacklist = ["FOR", "DD", "EV", "CEO", "EOD", "RH", "TD", "HUGE"]
 minLen = 2
