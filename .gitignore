@@ -1,0 +1,6 @@
+*.json
+*.csv
+
+.venv/
+vscode/
+Saved Data/
