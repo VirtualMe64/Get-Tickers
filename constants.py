@@ -1,4 +1,4 @@
-TICKER_BLACKLIST = ["FOR", "DD", "EV", "CEO", "EOD", "RH", "TD", "HUGE", "IT", "AM", "IMO", "UK"]
+TICKER_BLACKLIST = ["FOR", "DD", "EV", "CEO", "EOD", "RH", "TD", "HUGE", "IT", "AM", "IMO", "UK", "AT", "ON", "ARE", "CAN", "ALL", "NYC", "HAS", "PSA"]
 
 MOVES_TOMORROW_ULRS = [
     "https://www.reddit.com/r/wallstreetbets/comments/lh3qli/what_are_your_moves_tomorrow_february_11_2021/",
