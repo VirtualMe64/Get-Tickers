@@ -1,6 +1,9 @@
 *.json
 *.csv
 
+__pycache__/
+venv/
 .venv/
 vscode/
+.vscode/
 Saved Data/
