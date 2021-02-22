@@ -1,5 +1,6 @@
 import json
 import praw
+from datetime import datetime
 
 class CommentGetter:
     def __init__(self, keys_path):
@@ -29,5 +30,6 @@ class CommentGetter:
         :returns: praw.submission with comments loaded
         """
         submission = self.reddit.submission(url=url) # Initially load submission
-        submission.comments.replace_more(replace_more_runs) # Load more comments
+        remaining = submission.comments.replace_more(replace_more_runs) # Load more comments
+        print(f"Finished gathering comments with {len(remaining)} 'MoreComments' still unloaded at {datetime.now().strftime('%I:%M %p')}.\nNow analyzing comments")
         return submission
