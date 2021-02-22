@@ -30,6 +30,28 @@ class TickerParser:
             tickers.pop(0)
         
         self.tickers = tickers
+    
+    def __has_ticker(self, ticker, string):
+        """
+        Regex: '\\b{ticker}\\b'.\n
+        Returns if a ticker is in a string. This means the ticker is included, and either side of the ticker is either
+        the stard/end of the statement or a NON-LETTER character.\n
+        So if ticker is "GME", "$GME is cool" returns true but "I like AGME" returns false
+        """
+        ticker_length = len(ticker)
+        string_length = len(string)
+        indices = [i for i in range(string_length - ticker_length + 1) if string[i : i + ticker_length] == ticker]
+        for i in indices:
+            first = False
+            second = False
+            if i == 0 or not string[i - 1: i].isalpha():
+                first = True
+            if i + ticker_length == string_length or not string[i + ticker_length : i + ticker_length + 1].isalpha():
+                second = True
+            if first and second:
+                return True
+
+        return False
 
     def parse_tickers(self, string, ticker_counter):
         """
@@ -42,5 +64,6 @@ class TickerParser:
             return
 
         for ticker in self.tickers:
-            if " " + ticker +  " " in string or "$" + ticker + " " in string or " " + ticker +  "," in string or " " + ticker +  "." in string :
-                ticker_counter[ticker] += 1
+            if ticker in string:
+                if self.__has_ticker(ticker, string):
+                    ticker_counter[ticker] += 1
