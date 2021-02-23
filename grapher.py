@@ -87,10 +87,9 @@ def line_graph(directory_path, threshold, title=""):
     # TODO better y axis
     data_sets = []
     for file_name in os.listdir(directory_path):
-        if file_name.split(".")[1] == "json":
-            full_path = directory_path + file_name
-            with open(full_path, 'r') as open_file:
-                data_set = json.load(open_file)
+        full_path = directory_path + file_name
+        with open(full_path, 'r') as open_file:
+            data_set = json.load(open_file)
 
             data_sets.append(__to_relative_frequency(data_set))
     
