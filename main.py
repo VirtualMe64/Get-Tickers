@@ -1,7 +1,7 @@
 from ticker_parser import TickerParser
 from comment_getter import CommentGetter
 from grapher import bar_graph, line_graph
-import pickle
+import json
 import constants
 from datetime import datetime, timedelta
 from collections import Counter
@@ -20,7 +20,7 @@ save = True
 save_comments = True
 if (save_comments):
     comments = []
-    save_comments_path = "Saved Data\\Temp\\comments.pkl"
+    save_comments_path = "Saved Data\\Temp\\comments.json   "
 
 runs = 500
 n = 0
@@ -50,15 +50,15 @@ print(f"Number of comments analyzed: {n}")
 print(ticker_counter.most_common(40))
 
 if save:
-    filePath = custom_file_name if custom_file_name != "" else "Saved Data/WSB Graphing/" + " ".join(url.split('/')[-2].split('_')[-3:]) + ".pkl"
-    print("Saving data to " + filePath)
-    saveFile = open(filePath, 'wb')
-    pickle.dump(ticker_counter.most_common(), saveFile)
+    file_path = custom_file_name if custom_file_name != "" else "Saved Data/WSB Graphing/" + " ".join(url.split('/')[-2].split('_')[-3:]) + ".json"
+    print("Saving data to " + file_path)
+    with open(file_path, 'w') as open_file:
+        json.dump(dict(ticker_counter.most_common()), open_file, indent=4)
 
 if save_comments:
-    with open(save_comments_path, 'wb') as open_file:
-        pickle.dump(comments, open_file)    
+    with open(save_comments_path, 'w') as open_file:
+        json.dump(comments, open_file)
 
 DEFAULT_THRESHOLD = 0.01
 
-bar_graph(ticker_counter.most_common(), DEFAULT_THRESHOLD)
+bar_graph(dict(ticker_counter.most_common()), DEFAULT_THRESHOLD)
